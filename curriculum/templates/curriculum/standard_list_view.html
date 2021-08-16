@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content  %}
+้้้
+<BODY> 
+    <!-- class row2 for cards -->
+    <div class="row">
+        {% for standard in standards %}
+        <div class="col-md-4 d-flex mb-5 justify-content-center">
+          <div class="card text-center" style="width: 18rem;">
+            <div class="card-body">
+              <h4 class="card-title" style="color:#ff5722;">{{standard.name}}</h4>
+              <p class="card-text">{{standard.description|truncatechars:75}}</p>
+              {% if user.is_authenticated %}
+                    <a href="{% url 'curriculum:subject_list' slug=standard.slug %}" class="btn btn-primary" style="background-color:#00bcd4;">Dive through Subjects</a>
+              {%else%}
+                    <p>Register or login to start learning</p>
+                    <a href="{% url 'user_login' %}" class="btn btn-primary" style="background-color:#00bcd4;">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-primary" style="background-color:#00bcd4;">Register</a>
+              {%endif%}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+</div>
+    
+    
+</BODY>
+{% endblock content  %}
